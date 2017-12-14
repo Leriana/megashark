@@ -34,12 +34,22 @@ class RoomsController extends AppController
      */
     public function view($id = null)
     {
-        $room = $this->Rooms->get($id, [
-            'contain' => []
-        ]);
+        $room = $this->Rooms->get($id);
+        
+        $monday = new \DateTime('monday this week');
+        $sunday = new \DateTime('sunday this week');
 
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
+        
+        $showtimes=$this->Rooms->Showtimes->
+            find()->
+            select(['id','movie_id','room_id','start','end'])->
+            where(['room_id = '=>$room->id])->
+            where(['start >= '=>$monday])->
+            where(['start <= '=>$sunday])->;
+        
+        $this->set('showtimes',$showtimes);
     }
 
     /**
@@ -107,4 +117,7 @@ class RoomsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    
+    
 }

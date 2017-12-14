@@ -77,6 +77,35 @@
                 </td>
             </tr>
             <?php endforeach; ?>
+            
+            
+            
+            
+            <?php if (!empty($movie->showtimes)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Movie Id') ?></th>
+                <th scope="col"><?= __('Room Id') ?></th>
+                <th scope="col"><?= __('Start') ?></th>
+                <th scope="col"><?= __('End') ?></th>
+                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Modified') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($movie->showtimes as $showtimes): ?>
+            <tr>
+                <td><?= h($showtimes->id) ?></td>
+                <td><?= h($showtimes->movie_id) ?></td>
+                <td><?= h($showtimes->room_id) ?></td>
+                <td><?= h($showtimes->start) ?></td>
+                <td><?= h($showtimes->end) ?></td>
+                <td><?= h($showtimes->created) ?></td>
+                <td><?= h($showtimes->modified) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Showtimes', 'action' => 'view', $showtimes->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Showtimes', 'action' => 'edit', $showtimes->id]) ?>
+                    <?= $this
         </table>
         <?php endif; ?>
     </div>
